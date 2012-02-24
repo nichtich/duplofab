@@ -7,34 +7,41 @@
 
 The following grid can be used to design \textbf{DUPLO compatible plates}. It
 shows the basic $16$mm grid with nobs (diameter $9.6$mm) and build areas of
-MakerBot Cupcake~CNC ($100\times 100$mm), Thing-O-Matic ($96\times 108$mm), and
-Replicater ($145 \times 225$mm), and the smallest standard size of Ponoko (and
-its partners RazorLAB, Formulor, and Vectorealism) ($181\times 181$mm).
+several 3D printers and the smallest size of Ponoko and related 2D cutting
+services.% its partners: RazorLAB, Formulor, and Vectorealism
 
 \begin{tikzpicture}
 
-\begin{scope}[dotted]
 % duplo matrix
-\draw[step=16mm] (0,0) grid (176mm,224mm);
+\draw[step=16mm,dotted] (0,0) grid (12*16mm,14*16mm);
+\draw[dotted] (0,0) to (12*16mm,12*16mm);
 
 % nops
-\foreach \x [evaluate = \x as \xp using ((\x-0.5) * 16)] in {1,2,3,4,5,6,7,8,9,10,11}{
+\foreach \x [evaluate = \x as \xp using ((\x-0.5) * 16)] in {1,2,3,4,5,6,7,8,9,10,11,12}{
   \foreach \y [evaluate = \y as \yp using ((\y-0.5) * 16)] in {1,2,3,4,5,6,7,8,9,10,11,12,13,14}{
-    \draw (\xp mm,\yp mm) circle (4.8mm);
+    \draw[dotted] ((\xp mm,\yp mm) circle (4.8mm);
   }
 }
-\end{scope}
 
 % areas
-\draw (0,0) rectangle (100mm,100mm);
-\draw (0,0) rectangle (181mm,181mm);
-\draw (0,0) rectangle (145mm,225mm);
-\draw (0,0) rectangle (96mm,108mm);
+\foreach \label/\x/\y in {
+  MakerBot Cupcake CNC/{100}/100,
+  MakerBot Replicater/{145}/225,
+  MakerBot Thing-O-Matic/{96}/108,
+  Ultimaker/{210}/210,
+  MakerGear Mosaic/{127}/127,
+  Ponoko P1 (cutting service)/{181}/181
+  % TODO: printrbot
+}{
+  \draw (0,0) rectangle (\x mm,\y mm);
+  \node[fill=white,anchor=west] at (7mm,\y mm) {\label: \x$\times$\y mm};
+}
 \end{tikzpicture}
 
 \pagebreak
 \pagestyle{empty}
 
+Markble track dimensions:
 The bars should not be tight, so I choose make them $12$mm diameter (including an expected
 $0.25$mm laser cutter width. Marble holes are $16$mm diameter and marble tracks $12$mm, so
 marbles should have diameter between $13$ and $15$mm.
